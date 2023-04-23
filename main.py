@@ -22,32 +22,46 @@ class Chess:
 
         screen = self.screen
         game = self.game
-        dragger = self.game.dragger
         board = self.game.board
+        dragger = self.game.dragger
 
         screen.fill(color="gray")
         game.draw_board(screen)
         game.draw_pieces(screen)
-        while True:
-            for event in pygame.event.get():
 
+        while True:
+
+            for event in pygame.event.get():
                 # click
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     dragger.update_mouse(event.pos)
-                    pygame.mouse.get_pos()
                     for row in range(ROWS):
                         for col in range(COLS):
                             if board.squares[row][col].true_coords.collidepoint(event.pos):
-                                print(row, col)
+                                clicked_row = row
+                                clicked_col = col
 
+                                # if clicked square has a piece ?
+                                if board.squares[clicked_row][clicked_col].has_piece():
+                                    piece = board.squares[clicked_row][clicked_col].piece
+                                    dragger.save_initial(clicked_row, clicked_col)
+                                    dragger.drag_piece(piece)
 
                 # mouse motion
                 elif event.type == pygame.MOUSEMOTION:
-                    pass
+                    if dragger.dragging:
+                        dragger.update_mouse(event.pos)
+                        screen.fill(color="gray")
+                        game.draw_board(screen)
+                        game.draw_pieces(screen)
+                        dragger.update_blit(screen, board)
 
                 # click release
-                elif event.type == pygame.MOUSEMOTION:
-                    pass
+                elif event.type == pygame.MOUSEBUTTONUP:
+                    dragger.undrag_piece()
+                    screen.fill(color="gray")
+                    game.draw_board(screen)
+                    game.draw_pieces(screen)
 
                 elif event.type == pygame.QUIT:
                     pygame.quit()
