@@ -47,3 +47,21 @@ class Board(pygame.Surface):
         self.squares[row_other][4] = Square(row_pawn, 4, King(color))
 
         print(self.squares)
+
+    def calc_moves(self, piece, row, col):
+        """Calculate all the possible moves of specific piece
+        on a specific position"""
+
+        if isinstance(piece, Pawn):
+            pass
+        elif isinstance(piece, Knight):
+            pass
+        elif isinstance(piece, Bishop):
+            pass
+        elif isinstance(piece, Rook):
+            pass
+        elif isinstance(piece, Queen):
+            pass
+        elif isinstance(piece, King):
+            pass
+

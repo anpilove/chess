@@ -30,8 +30,8 @@ class Chess:
         game.draw_pieces(screen)
 
         while True:
-
             for event in pygame.event.get():
+
                 # click
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     dragger.update_mouse(event.pos)
@@ -50,15 +50,19 @@ class Chess:
                 # mouse motion
                 elif event.type == pygame.MOUSEMOTION:
                     if dragger.dragging:
+
                         dragger.update_mouse(event.pos)
+
+                        # draw everything
                         screen.fill(color="gray")
                         game.draw_board(screen)
                         game.draw_pieces(screen)
-                        dragger.update_blit(screen, board)
+                        dragger.update_blit(screen)
 
                 # click release
                 elif event.type == pygame.MOUSEBUTTONUP:
                     dragger.undrag_piece()
+
                     screen.fill(color="gray")
                     game.draw_board(screen)
                     game.draw_pieces(screen)

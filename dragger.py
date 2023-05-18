@@ -12,8 +12,8 @@ class Dragger:
         self.initial_row = 0
         self.initial_col = 0
 
-    def update_blit(self, surface, board):
-        self.piece.set_texture(size=80)
+    def update_blit(self, surface):
+        self.piece.set_texture(size=128)
         texture = self.piece.texture
         img = pygame.image.load(texture)
         img_center = (self.mouseX, self.mouseY)
